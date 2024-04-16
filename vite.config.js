@@ -46,5 +46,28 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+    proxy: {
+      // string shorthand
+      // '*': 'http://127.0.0.1:3001/api/',
+      // with options
+      // '/api': {
+      //   target: 'http://127.0.0.1:3001',
+      //   changeOrigin: true,
+      //   rewrite: (path) => path.replace(/^\/api/, '')
+      // },
+
+      // Using the proxy instance
+      // '/api': {
+      //   target: 'http://127.0.0.1:3001',
+      //   changeOrigin: true,
+      //   configure: (proxy, options) => {
+      //     // proxy will be an instance of 'http-proxy'
+      //   }
+      // },
+
+      '/api': 'http://127.0.0.1:3001',
+
+
+    }
   },
 })

@@ -4,9 +4,7 @@
 
       <TebexIcon class="customMargin mt-9 mb-7"  />
       <p class="text-left customMargin fontSize-15 mb-9">Your order</p>
-
-
-  <basketProduct v-for="i in 5" :key="i" />
+  <basketProduct v-for="product in basket.products" :product="product" :key="i" />
       <div class="v-col-12 v-col-lg-9  mx-auto pl-5  mt-10" >
         <p class="my-3">Coupon/Gift Card</p>
         <v-row>
@@ -83,8 +81,8 @@
 
           ></v-text-field>
         </div>
-        <v-row class="v-col-12">
-          <v-col class="v-col-3 pr-1">
+        <v-row class="v-col-12 pr-0">
+          <v-col class="v-col-12 v-col-lg-3">
             <label>Expiry Date*</label>
             <v-text-field
               density="compact"
@@ -95,7 +93,7 @@
 
             ></v-text-field>
           </v-col>
-          <v-col class="v-col-3 pl-0 pr-1">
+          <v-col class="v-col-12 v-col-lg-3">
             <label>CVC/CVV*</label>
             <v-text-field
               density="compact"
@@ -106,7 +104,7 @@
 
             ></v-text-field>
           </v-col>
-          <v-col class="v-col-6 pl-0">
+          <v-col class="v-col-12 v-col-lg-6 pr-0">
             <label>Zip Code / Postal Code*</label>
             <v-text-field
               density="compact"
@@ -145,11 +143,25 @@
 <script setup>
 
 import TebexIcon from "@/components/TebexIcon";
-import { useDisplay } from 'vuetify'
-
 import basketProduct from '@/components/basketProduct'
+// import { useDisplay } from 'vuetify'
+ import {onMounted} from "vue";
+import pinia from "@/store/index.js";
+import {useAppStore} from "@/store/app";
+const appStore = useAppStore(pinia)
+import {storeToRefs} from 'pinia'
+const {basket} = storeToRefs(appStore)
+const {fetchBasket} = appStore;
+
+
+onMounted(async ()=>{
+  await fetchBasket();
+})
+
+//
+
 // import {computed} from "vue";
-const { mobile } = useDisplay()
+// const { mobile } = useDisplay()
 // const isMobile = computed(()=>{
 //   return
 // })
