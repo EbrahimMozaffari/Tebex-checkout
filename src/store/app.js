@@ -5,6 +5,8 @@ export const useAppStore = defineStore('app', {
   state: () => ({
     layout: false,
     snackbar: false,
+    snackColor:'',
+    snackbarMessage:'',
     basket:{},
     //
   }),
@@ -22,6 +24,10 @@ export const useAppStore = defineStore('app', {
     async fetchBasket() {
       const {data} = await appService().fetchBasket();
       console.log(data)
+      this.basket = data;
+    },
+    async addCoupon(payload) {
+      const {data} = await appService().addCoupon(payload);
       this.basket = data;
     },
   }

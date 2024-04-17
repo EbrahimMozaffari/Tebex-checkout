@@ -1,16 +1,14 @@
 <template>
-<v-locale-provider rtl>
 
   <v-snackbar
   style="z-index:20002"
     v-model="snackbar"
-    :location="location"
+    location="top"
     :color="snackColor"
-    :multi-line="multiLine"
     :timeout="3000"
      class="elevation-6"
   >
-  <span class="text-white">
+  <span >
     {{ snackbarMessage }}
 
   </span>
@@ -22,7 +20,6 @@
       </v-btn> -->
     </template>
   </v-snackbar>
-  </v-locale-provider>
 </template>
 <script setup>
 import {storeToRefs} from 'pinia'

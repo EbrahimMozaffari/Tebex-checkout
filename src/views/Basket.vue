@@ -15,6 +15,7 @@
               variant="solo"
               hide-details
               single-line
+              v-model="couponCode"
 
             ></v-text-field>
           </v-col>
@@ -22,8 +23,8 @@
             <v-btn
             class="text-none"
             color="grey-lighten-3"
-
             variant="flat"
+            @click="addCouponBasket"
 
           >
             Confirm
@@ -32,15 +33,15 @@
 
         <div class="mt-5 d-flex justify-space-between ">
           <p>Subtotsl:</p>
-          <p>$13.98</p>
+          <p>${{basket.subTotal}}</p>
         </div>
         <div class="mt-5 d-flex justify-space-between ">
           <p>Sale Tax:</p>
-          <p>$0.00</p>
+          <p>${{basket.salesTax}}</p>
         </div>
         <div class="mt-5 d-flex justify-space-between text-h5">
           <p >Totsl Price:</p>
-          <p>$13.98</p>
+          <p>${{basket.total}}</p>
         </div>
       </div>
 
@@ -145,18 +146,28 @@
 import TebexIcon from "@/components/TebexIcon";
 import basketProduct from '@/components/basketProduct'
 // import { useDisplay } from 'vuetify'
- import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
 import pinia from "@/store/index.js";
 import {useAppStore} from "@/store/app";
 const appStore = useAppStore(pinia)
 import {storeToRefs} from 'pinia'
 const {basket} = storeToRefs(appStore)
-const {fetchBasket} = appStore;
+const {fetchBasket,addCoupon} = appStore;
+
+const couponCode = ref('')
 
 
 onMounted(async ()=>{
   await fetchBasket();
 })
+
+const addCouponBasket = async () => {
+  await addCoupon({
+    id:basket.value.id,
+    couponCode:couponCode.value,
+  })
+  //await fetchBasket();
+}
 
 //
 

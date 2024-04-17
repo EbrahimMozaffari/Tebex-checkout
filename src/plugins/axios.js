@@ -114,8 +114,8 @@ axiosInstance.interceptors.response.use(
       } else if (error.response.status >= 400 && error.response.status <= 500) {
         //console.log("error.response",error.response)
         // let text =`کد خطا ${error.response.data.error.code}-${error.response.data.error.description}` ;
-         if (error.response.data.msg){
-          setSnackbar({ snackbar: true, message:error.response.data.msg  ,color:'red'})
+         if (error.response.data.message){
+          setSnackbar({ snackbar: true, message:error.response.data.message  ,color:'red'})
           //store.commit("app/SET_SNACKBAR", { snackbar: true, message: text ,color:'red'});
         }
 
