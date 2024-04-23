@@ -9,12 +9,15 @@ export function appService() {
   };
   const addCoupon = async (data) => {
     //let url = `/api/basket/${data.id}/coupon`;
-    console.log(data)
     return await axiosInstance.post(`/api/basket/${data.id}/coupon`,{code:data.couponCode});
   };
-
+  const checkout = async (data) => {
+    console.log(data)
+    return await axiosInstance.post(`/api/basket/${data.id}/checkout`,data.body);
+  };
   return {
     fetchBasket,
     addCoupon,
+    checkout,
   };
 }

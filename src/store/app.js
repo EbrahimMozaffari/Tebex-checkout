@@ -1,6 +1,7 @@
 // Utilities
 import { defineStore } from 'pinia'
- import {appService} from "@/services/appService";
+import {appService} from "@/services/appService";
+import router from "@/router";
 export const useAppStore = defineStore('app', {
   state: () => ({
     layout: false,
@@ -8,6 +9,7 @@ export const useAppStore = defineStore('app', {
     snackColor:'',
     snackbarMessage:'',
     basket:{},
+    transactionId:'',
     //
   }),
   getters: {},
@@ -23,12 +25,20 @@ export const useAppStore = defineStore('app', {
 
     async fetchBasket() {
       const {data} = await appService().fetchBasket();
-      console.log(data)
       this.basket = data;
     },
     async addCoupon(payload) {
       const {data} = await appService().addCoupon(payload);
-      this.basket = data;
+      if(data.couponCode){
+        this.basket = data;
+      }
+    },
+    async checkout(payload) {
+      const {data} = await appService().checkout(payload);
+      if(data.success){
+        this.transactionId = data.transactionId;
+        await router.push({name:'Success'})
+      }
     },
   }
 

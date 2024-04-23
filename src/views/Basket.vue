@@ -63,6 +63,7 @@
         <div class="v-col-12">
           <label>Email*</label>
           <v-text-field
+            v-model="email"
             density="compact"
             label="Enter your email address"
             variant="solo"
@@ -74,6 +75,7 @@
         <div class="v-col-12">
           <label>Card number*</label>
           <v-text-field
+            v-model="cardNumber"
             density="compact"
             label="1234 5678 9101 1121"
             variant="solo"
@@ -86,6 +88,7 @@
           <v-col class="v-col-12 v-col-lg-3">
             <label>Expiry Date*</label>
             <v-text-field
+              v-model="cardExpiry"
               density="compact"
               label="MM/YY"
               variant="solo"
@@ -97,6 +100,7 @@
           <v-col class="v-col-12 v-col-lg-3">
             <label>CVC/CVV*</label>
             <v-text-field
+              v-model="cardCvc"
               density="compact"
               label="123"
               variant="solo"
@@ -108,6 +112,7 @@
           <v-col class="v-col-12 v-col-lg-6 pr-0">
             <label>Zip Code / Postal Code*</label>
             <v-text-field
+              v-model="postalCode"
               density="compact"
               label="N12 3ET"
               variant="solo"
@@ -119,6 +124,7 @@
         <div class="v-col-12">
           <label>Name on card*</label>
           <v-text-field
+            v-model="nameOnCard"
             density="compact"
             label="Enter your name as shown"
             variant="solo"
@@ -128,7 +134,7 @@
           ></v-text-field>
         </div>
         <div class="v-col-12">
-          <v-btn block flat color="#41C4C3">Pay by Card</v-btn>
+          <v-btn block flat color="#41C4C3" @click="checkoutBasket">Pay by Card</v-btn>
         </div>
 
 
@@ -152,10 +158,15 @@ import {useAppStore} from "@/store/app";
 const appStore = useAppStore(pinia)
 import {storeToRefs} from 'pinia'
 const {basket} = storeToRefs(appStore)
-const {fetchBasket,addCoupon} = appStore;
+const {fetchBasket,addCoupon,checkout} = appStore;
 
 const couponCode = ref('')
-
+const cardCvc = ref('')
+const cardExpiry = ref('')
+const cardNumber = ref('')
+const email = ref('')
+const nameOnCard = ref('')
+const postalCode = ref('')
 
 onMounted(async ()=>{
   await fetchBasket();
@@ -165,6 +176,20 @@ const addCouponBasket = async () => {
   await addCoupon({
     id:basket.value.id,
     couponCode:couponCode.value,
+  })
+  //await fetchBasket();
+}
+const checkoutBasket = async () => {
+  await checkout({
+    id:basket.value.id,
+    body:{
+      cardCvc:cardCvc.value,
+      cardExpiry:cardExpiry.value,
+      cardNumber:cardNumber.value,
+      email:email.value,
+      nameOnCard:nameOnCard.value,
+      postalCode:postalCode.value
+    }
   })
   //await fetchBasket();
 }
