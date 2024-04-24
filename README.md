@@ -1,69 +1,25 @@
-# essentials
+This project is a checkout sample 
+I use vue3 - Vuetify for UI - Pinia for state management 
 
-## Project setup
+### Setup
 
-```
-# yarn
-yarn
-
-# npm
+```shell
 npm install
-
-# pnpm
-pnpm install
-
-# bun
-bun install
 ```
 
-### Compiles and hot-reloads for development
+Launch the APIs this will run on port 3001
 
 ```
-# yarn
-yarn dev
+npm run api
+```
 
-# npm
+This project uses vite to run the dev server execute
+
+```
 npm run dev
-
-# pnpm
-pnpm dev
-
-# bun
-bun run dev
 ```
 
-### Compiles and minifies for production
+If you have opinion on my code contact me :)
 
-```
-# yarn
-yarn build
+ebrahim.mozafary@gmail.com
 
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# bun
-bun run build
-```
-
-### Lints and fixes files
-
-```
-# yarn
-yarn lint
-
-# npm
-npm run lint
-
-# pnpm
-pnpm lint
-
-# bun
-bun run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://vitejs.dev/config/).
