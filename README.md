@@ -1,6 +1,7 @@
 This project is a checkout sample 
 I use vue3 - Vuetify for UI - Pinia for state management 
 
+
 ### Setup
 
 ```shell
@@ -17,6 +18,12 @@ This project uses vite to run the dev server execute
 
 ```
 npm run dev
+```
+
+#### Apply coupon
+
+```text
+ 25OFF
 ```
 
 If you have opinion on my code contact me :)
